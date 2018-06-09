@@ -1,6 +1,7 @@
 package com.imooc.sell.logtest;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,5 +21,12 @@ public class LogTest {
         log.debug("log  debug  测试");
         log.error("log  error  测试");
         log.warn("log  warn  测试");
+    }
+
+    @Test
+    public void assertTest(){
+//        Object o=null;
+        Object o=new Object();
+        Assert.assertNotNull(null);
     }
 }

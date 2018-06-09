@@ -20,7 +20,7 @@ import java.util.Date;
 public class ProductCategory {
 //    类目id
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  /*自增类型*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  /*(strategy = GenerationType.IDENTITY)自增类型*/
     private  Integer categoryId;
 //    类目名字
     private  String categoryName;
