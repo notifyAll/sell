@@ -27,6 +27,6 @@ public class LogTest {
     public void assertTest(){
 //        Object o=null;
         Object o=new Object();
-        Assert.assertNotNull(null);
+        Assert.assertNotNull(0);
     }
 }

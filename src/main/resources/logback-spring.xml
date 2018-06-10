@@ -4,7 +4,7 @@
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
-                %d - %msg%n
+                %d [%-5level][%thread] %c - %msg%n
             </pattern>
         </layout>
     </appender>
