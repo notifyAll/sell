@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -21,8 +22,9 @@ public class ProductInfoRepositoryTest {
     @Resource
     ProductInfoRepository productInfoRepository;
 
+
     @Test
-    public void findByProductStatus() {
+    public void save(){
         ProductInfo productInfo=new ProductInfo();
         productInfo.setProductId("1000");
         productInfo.setProductName("亚丝娜手办");
@@ -34,5 +36,11 @@ public class ProductInfoRepositoryTest {
         productInfo.setCategoryType(5);
 
         productInfoRepository.save(productInfo);
+    }
+    @Test
+    public void findByProductStatus() {
+        List<ProductInfo> byProductStatus = productInfoRepository.findByProductStatus(0);
+        log.info("size : {}",byProductStatus.size());
+        log.info("byProductStatus : {}",byProductStatus);
     }
 }

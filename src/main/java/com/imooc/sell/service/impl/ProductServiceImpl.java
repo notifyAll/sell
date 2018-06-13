@@ -4,6 +4,7 @@ import com.imooc.sell.dao.ProductInfoRepository;
 import com.imooc.sell.entity.ProductInfo;
 import com.imooc.sell.enums.ProductStatusEnum;
 import com.imooc.sell.service.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,10 @@ public class ProductServiceImpl implements ProductService {
     @Resource
     private ProductInfoRepository repository;
 
+
     @Override
     public ProductInfo findOne(String productId) {
-        return null;
+        return repository.findById(productId).get();
     }
 
     /**
@@ -31,12 +33,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductInfo> findAll(Pageable pageable) {
-        return null;
+    public Page<ProductInfo> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override
     public ProductInfo save(ProductInfo productInfo) {
-        return null;
+        return repository.save(productInfo);
     }
 }
