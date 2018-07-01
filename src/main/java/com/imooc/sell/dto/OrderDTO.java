@@ -1,33 +1,25 @@
-package com.imooc.sell.entity;
+package com.imooc.sell.dto;
 
+import com.imooc.sell.entity.OrderDetail;
 import com.imooc.sell.enums.OrderStatusEnum;
 import com.imooc.sell.enums.PayStatusEnum;
 import lombok.Data;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 /**
- * 订单主表
+ * 订单 数据传输对象
  */
-@Entity
-@Table(name = "order_master")
 @Data
-@DynamicUpdate
-@DynamicInsert
-public class OrderMaster {
+public class OrderDTO {
+
 
     /**
      * 订单id
      */
-    @Id
     private String orderId;
 
     /**
@@ -55,11 +47,11 @@ public class OrderMaster {
     /**
      * 订单状态 默认新下单
      */
-    private Integer orderStatus=OrderStatusEnum.NEW.getCode();
+    private Integer orderStatus;
     /**
      * 支付状态 默认0 未支付
      */
-    private Integer payStatus=PayStatusEnum.WAIT.getCode();
+    private Integer payStatus;
     /**
      * 创建时间
      */
@@ -69,6 +61,8 @@ public class OrderMaster {
      */
     private Date updateTime;
 
-//    @Transient //可以忽略  但不太好
-//    private List<OrderDetail> orderDetailList;
+    /**
+     * 订单详情列表
+     */
+    private List<OrderDetail> orderDetailList;
 }
