@@ -33,7 +33,7 @@ public class OrderMasterRepositoryTest {
         orderMaster.setBuyerPhone("13456006965");
         orderMaster.setBuyerAddress("地狱101");
         orderMaster.setBuyerOpenid("11111113");
-        orderMaster.setOrderAmmount(new BigDecimal(310));
+        orderMaster.setOrderAmount(new BigDecimal(310));
 
         OrderMaster save = repository.save(orderMaster);
         Assert.assertNotNull(save);

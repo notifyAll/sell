@@ -7,6 +7,8 @@ import com.imooc.sell.dto.OrderDTO;
 import com.imooc.sell.entity.OrderDetail;
 import com.imooc.sell.entity.OrderMaster;
 import com.imooc.sell.entity.ProductInfo;
+import com.imooc.sell.enums.OrderStatusEnum;
+import com.imooc.sell.enums.PayStatusEnum;
 import com.imooc.sell.enums.ResultEnum;
 import com.imooc.sell.exception.SellException;
 import com.imooc.sell.service.OrderService;
@@ -22,7 +24,6 @@ import javax.annotation.Resource;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,23 +62,29 @@ public class OrderServiceImpl implements OrderService {
 //                throw new SellException()
 //            }
 
-            //        2计算订单总价
-           orderAmount = orderDetail.getProductPrice()
+            //        2计算订单总价  商品单价 * multiply  订单中的商品数量 再累加总金额
+           orderAmount = productInfo.getProductPrice()
                    .multiply(new BigDecimal(orderDetail.getProductQuantity()))
                    .add(orderAmount);
 
             //订单详情入库
+            BeanUtils.copyProperties(productInfo,orderDetail); //属性拷贝 先属性拷贝 再单个赋值  因为null 值也会被拷贝进去
             orderDetail.setDetailId(KeyUtil.getUniqueKey());
             orderDetail.setOrderId(orderId);
-            BeanUtils.copyProperties(productInfo,orderDetail); //属性拷贝
+
+
             orderDetailRepository.save(orderDetail); //详情写入数据库
 
         }
 //        3写入订单数据库 orderMaster 和orderDetil
         OrderMaster orderMaster =new OrderMaster();
-        orderMaster.setOrderAmmount(orderAmount);
-        orderMaster.setOrderId(orderId);
         BeanUtils.copyProperties(orderDTO,orderMaster);
+        orderMaster.setOrderAmount(orderAmount);
+        orderMaster.setOrderId(orderId);
+        orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
+        orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
+
+
         orderMasterRepository.save(orderMaster);
         //        4扣库存
         List<CartDTO> cartDTOList = orderDTO.getOrderDetailList()
