@@ -42,7 +42,7 @@ public class OrderDTO {
     /**
      * 订单总金额
      */
-    private BigDecimal orderAmmount;
+    private BigDecimal orderAmount;
 
     /**
      * 订单状态 默认新下单

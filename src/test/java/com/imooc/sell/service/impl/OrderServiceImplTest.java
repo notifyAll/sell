@@ -3,9 +3,13 @@ package com.imooc.sell.service.impl;
 import com.imooc.sell.dto.CartDTO;
 import com.imooc.sell.dto.OrderDTO;
 import com.imooc.sell.entity.OrderDetail;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -16,6 +20,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class OrderServiceImplTest {
 
 
@@ -51,14 +56,22 @@ public class OrderServiceImplTest {
 
     @Test
     public void findOne() {
+        OrderDTO orderDTO = orderService.findOne("1530543248720853730");
+        log.info("orderDTO : {}",orderDTO);
     }
 
     @Test
     public void findList() {
+        QPageRequest request=new QPageRequest(0,2);
+        Page<OrderDTO> orderDTOPage=orderService.findList(BUYER_OPENID,request);
+        log.info("[订单查选list] orderDTOPage：{}" ,orderDTOPage);
     }
 
     @Test
     public void cancel() {
+        OrderDTO orderDTO=orderService.findOne("1530542933008558247");
+        OrderDTO cancel = orderService.cancel(orderDTO);
+        log.info("【取消订单】cancel {}",cancel);
     }
 
     @Test
