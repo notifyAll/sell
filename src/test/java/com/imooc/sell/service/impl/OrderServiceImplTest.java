@@ -76,9 +76,16 @@ public class OrderServiceImplTest {
 
     @Test
     public void finish() {
+        OrderDTO orderDTO=orderService.findOne("1530542933008558247");
+        OrderDTO cancel = orderService.finish(orderDTO);
+        log.info("【完成订单】cancel {}",cancel);
+
     }
 
     @Test
     public void paid() {
+        OrderDTO orderDTO=orderService.findOne("1530542933008558247");
+        OrderDTO cancel = orderService.paid(orderDTO);
+        log.info("【支付订单】cancel {}",cancel);
     }
 }
