@@ -68,6 +68,12 @@ java.lang.NoClassDefFoundError: com/querydsl/core/types/OrderSpecifier-->
             <artifactId>querydsl-apt</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!--json 转换工具 gson-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
