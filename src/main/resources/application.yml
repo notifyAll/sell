@@ -11,6 +11,12 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+      # json 全局配置 不反回为null的字段
+  jackson:
+    default-property-inclusion: non_null
+
+
+#log的简单配置
 #logging:
 #  pattern:
 #    console: "%d - %msg%n"
